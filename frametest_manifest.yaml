@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: frametest
+spec:
+  manualSelector: true
+  selector:
+    matchLabels:
+      app: frametest
+  template:
+    metadata:
+      labels:
+        app: frametest
+    spec:
+      containers:
+      - name: frametest-container
+        image: vaipali/my-first-repo:frametest_2
+        imagePullPolicy: Always
+        command: ["python3", "./app_locust.py", "./locust-script.py"]
+      restartPolicy: OnFailure
