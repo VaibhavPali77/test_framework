@@ -5,10 +5,10 @@ import os
 import sys
 values = {}
 
-Vus = "1"
-Rate = "1"
+Vus = "3"
+Rate = "3"
 Rps = "100"
-Duration = "30s"
+Duration = "300s"
 
 try:
     Pods = os.environ["DISTRIBUTED_PODS"]
