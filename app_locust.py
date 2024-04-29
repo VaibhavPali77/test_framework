@@ -9,7 +9,11 @@ Vus = "125"
 Rate = "125"
 Rps = "100"
 Duration = "30s"
-Pods = "1"
+
+try:
+    Pods = os.environ["DISTRIBUTED_PODS"]
+except:
+    Pods = "1"
 
 values["Vus"] = Vus
 values["Rate"] = Rate
@@ -19,6 +23,8 @@ values["Pods"] = Pods
 
 pythonScript = sys.argv[1]
 mainDir = os.path.dirname(__file__)
+
+helmFolder = sys.argv[2]
 
 print("Starting process.......")
 ######___________________________________________Extracting the main python script
@@ -41,7 +47,7 @@ print(f"Extracted IP : {values['Ip']}")
 
 
 ######___________________________________________Populating the values.yaml file
-valuesFile = os.path.join(mainDir, "locust-helm/values.yaml")
+valuesFile = os.path.join(mainDir, f"{helmFolder}/values.yaml")
 with open(valuesFile, "w") as value_file:
     value_file.write(yaml.dump(values))
 print("Populated values.yaml")
@@ -50,7 +56,7 @@ print("Populated values.yaml")
 ######___________________________________________Deploying Helm
 try:
     time.sleep(2)
-    helmDirec = os.path.join(mainDir, "locust-helm")
+    helmDirec = os.path.join(mainDir, helmFolder)
     if os.system(f"helm install locust {helmDirec}") != 0:
         print("Error deploying helm.......")
     else:
