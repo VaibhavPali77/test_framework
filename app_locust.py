@@ -79,5 +79,5 @@ try:
                 break
             time.sleep(30)
 finally:
-    print("\n\n\n\n........deleting locust instance")
+    print("\n\n........deleting locust instance")
     os.system("helm uninstall locust")
