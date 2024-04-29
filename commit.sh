@@ -1,9 +1,9 @@
 #!/bin/bash
 
-msg=$1
+comment=$1
 
 git add .
-git commit -m "${msg}"
+git commit -m "${comment}"
 git push origin main
 
 #echo $msg
