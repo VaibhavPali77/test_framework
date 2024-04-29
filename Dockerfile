@@ -24,7 +24,6 @@ RUN apt update
 RUN apt install helm -y
 
 RUN mkdir framework
-COPY . ./framework
 WORKDIR /framework
 
 CMD ["sleep", "infinity"]
